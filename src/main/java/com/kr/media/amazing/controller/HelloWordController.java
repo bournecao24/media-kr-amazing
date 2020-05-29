@@ -2,6 +2,7 @@ package com.kr.media.amazing.controller;
 
 
 import com.kr.media.amazing.entity.Book;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,9 @@ import java.util.List;
 public class HelloWordController {
 
     private List<Book> books = new ArrayList<>();
+
+    @Value("${wuhan2020}")
+    String wuhan2020;
 
 
     /**

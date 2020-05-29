@@ -41,6 +41,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.36kr</groupId>
+            <artifactId>media-server-mrs-data-migration</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
