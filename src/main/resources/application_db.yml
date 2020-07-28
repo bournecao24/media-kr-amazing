@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    jdbc-url: jdbc:mysql://localhost/test
+    username: rw
+    password: rw_password
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      pool-name: HikariCP
+      auto-commit: false
+  ro-datasource:
+    jdbc-url: jdbc:mysql://localhost/test
+    username: ro
+    password: ro_password
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      pool-name: HikariCP
+      auto-commit: false

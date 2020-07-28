@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Configuration monitorInterval="30" status="DEBUG">
+	<Properties>
+		<Property name="pattern_file">%d{yyyy-MM-dd}.log</Property>
+		<Property name="pattern_layout">
+			[%t] %d{MM/dd-HH:mm:ss,SSS} %-5level %l - %msg%n
+		</Property>
+		<Property name="path">logs
+		</Property>
+	</Properties>
+
+	<Appenders>
+		<!-- CONSOLE -->
+		<Console name="CONSOLE" target="SYSTEM_OUT">  
+            <PatternLayout pattern="${pattern_layout}" />  
+        </Console> 
+        
+        <!-- DEMO -->
+		<RollingFile name="DEMO" fileName="${path}/demo.log"
+			filePattern="${path}/history/demo.${pattern_file}">
+			<PatternLayout charset="utf-8">
+				<pattern>${pattern_layout}</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="${path}" maxDepth="2">
+					<IfFileName glob="*/demo.*.log" />
+					<IfLastModified age="P7D" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+
+		<!-- DEMO_ERROR -->
+		<RollingFile name="DEMO_ERROR" fileName="${path}/demo_error.log"
+			filePattern="${path}/history/demo_error.${pattern_file}">
+			<PatternLayout charset="utf-8">
+				<pattern>${pattern_layout}</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="${path}" maxDepth="2">
+					<IfFileName glob="*/demo_error.*.log" />
+					<IfLastModified age="P7D" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+
+		<!-- DEMO_STATISTICS -->
+		<RollingFile name="DEMO_STATISTICS" fileName="${path}/demo_statistics.log"
+			filePattern="${path}/history/demo_statistics.${pattern_file}">
+			<PatternLayout charset="utf-8">
+				<pattern>${pattern_layout}</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="${path}" maxDepth="2">
+					<IfFileName glob="*/demo_statistics.*.log" />
+					<IfLastModified age="P7D" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+	</Appenders>
+
+	<Loggers>
+		<Root includeLocation="true" level="info">
+			<AppenderRef ref="CONSOLE" level="info"/>
+			<AppenderRef ref="DEMO" />
+			<AppenderRef ref="DEMO_ERROR" level="error" />
+		</Root>
+		
+		<Logger name="com.kr.media.util.filter.log.LogFilter" level="info" additivity="false"
+			includeLocation="true">
+			<AppenderRef ref="DEMO_STATISTICS" />
+		</Logger>
+	</Loggers>
+</Configuration>
+
