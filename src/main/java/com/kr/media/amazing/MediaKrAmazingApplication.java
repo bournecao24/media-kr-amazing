@@ -31,40 +31,40 @@ public class MediaKrAmazingApplication {
     }
 
 
-    @Bean
-    @Primary
-    DataSource primaryDataSource(@Autowired @Qualifier("masterDataSource") DataSource masterDataSource,
-            @Autowired @Qualifier("slaveDataSource") DataSource slaveDataSource) {
-        logger.info("create routing datasource...");
-        Map<Object, Object> map = new HashMap<>();
-        map.put("masterDataSource", masterDataSource);
-        map.put("slaveDataSource", slaveDataSource);
-        RoutingDataSource routing = new RoutingDataSource();
-        routing.setTargetDataSources(map);
-        routing.setDefaultTargetDataSource(masterDataSource);
-        return routing;
-    }
+//    @Bean
+//    @Primary
+//    DataSource primaryDataSource(@Autowired @Qualifier("masterDataSource") DataSource masterDataSource,
+//            @Autowired @Qualifier("slaveDataSource") DataSource slaveDataSource) {
+//        logger.info("create routing datasource...");
+//        Map<Object, Object> map = new HashMap<>();
+//        map.put("masterDataSource", masterDataSource);
+//        map.put("slaveDataSource", slaveDataSource);
+//        RoutingDataSource routing = new RoutingDataSource();
+//        routing.setTargetDataSources(map);
+//        routing.setDefaultTargetDataSource(masterDataSource);
+//        return routing;
+//    }
 
 
-    /**
-     * Master data source.
-     */
-    @Bean("masterDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource")
-    DataSource masterDataSource() {
-        logger.info("create master datasource...");
-        return DataSourceBuilder.create().build();
-    }
-
-    /**
-     * Slave (read only) data source.
-     */
-    @Bean("slaveDataSource")
-    @ConfigurationProperties(prefix = "spring.ro-datasource")
-    DataSource slaveDataSource() {
-        logger.info("create slave datasource...");
-        return DataSourceBuilder.create().build();
-    }
+//    /**
+//     * Master data source.
+//     */
+//    @Bean("masterDataSource")
+//    @ConfigurationProperties(prefix = "spring.datasource")
+//    DataSource masterDataSource() {
+//        logger.info("create master datasource...");
+//        return DataSourceBuilder.create().build();
+//    }
+//
+//    /**
+//     * Slave (read only) data source.
+//     */
+//    @Bean("slaveDataSource")
+//    @ConfigurationProperties(prefix = "spring.ro-datasource")
+//    DataSource slaveDataSource() {
+//        logger.info("create slave datasource...");
+//        return DataSourceBuilder.create().build();
+//    }
 
 
 }
